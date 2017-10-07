@@ -199,8 +199,7 @@ ClickScatterPlot.prototype.drawPolynomialFit = function (order, name) {
 var dataNames = {'x': 'Weight', 'y': 'Price'}
 
 var canvasWidth = $('#canvas').width()
-var canvasHeight = $(window).height()
-console.log(canvasHeight)
+var canvasHeight = $(window).height() * 0.6
 
 if (canvasHeight > canvasWidth) {
   canvasHeight = canvasWidth
