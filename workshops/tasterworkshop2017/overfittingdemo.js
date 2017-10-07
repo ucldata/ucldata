@@ -17,7 +17,7 @@ var ClickScatterPlot = function (diagramName) {
   this.attr.marginLeft = 0.1
   this.attr.marginRight = 0.1
   this.attr.marginBottom = 0.1
-  this.attr.marginTop = 0.1
+  this.attr.marginTop = 0.02
 
   this.vars = {
     'x': 'x',
