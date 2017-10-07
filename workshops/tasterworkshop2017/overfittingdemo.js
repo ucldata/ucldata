@@ -232,3 +232,6 @@ $('.color').on('click', function () {
   console.log($(this).attr('data-color'))
   myplot.changeColor($(this).attr('data-color'))
 })
+
+
+<!-- Patrick Leask 2017 -->
