@@ -151,7 +151,7 @@ ClickScatterPlot.prototype.drawKNNFit = function (k, name) {
   //
   // }
   var xstep = 5
-  var ystep = 100
+  var ystep = 5
 
   $('.shading').remove()
 
