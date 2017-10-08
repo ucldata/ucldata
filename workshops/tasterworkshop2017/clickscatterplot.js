@@ -47,7 +47,7 @@ ClickScatterPlot.prototype.setCanvas = function (canvasName) {
 }
 
 ClickScatterPlot.prototype.createSVG = function () {
-  var that = this;
+  var that = this
   this.svg = this.canvas
     .append('svg')
       .attr('width', this.attr.width)
@@ -136,104 +136,63 @@ ClickScatterPlot.prototype.drawPoint = function (point) {
   }
 }
 
-ClickScatterPlot.prototype.drawPolynomialFit = function (order, name) {
-  if ($(`#line${name}`).length > 0) {
-    return
-  }
-
-  var that = this
-
-  var newreg = new PolynomialRegression(this.data, order)
-  this.regressions.push({'name': name, 'reg': newreg})
-
-  // calculate some points for the line to be plotted
-  var linepoints = []
-  var lineGran = 100
-  var xstep = (this.attr.width * (1 - this.attr.marginLeft - this.attr.marginRight)) / lineGran
-  for (var i = 1; i < lineGran; i++) {
-    var x = xstep * i
-    var y = newreg.predictY(newreg.getTerms(), x + this.attr.marginLeft * this.attr.width) - this.attr.marginTop * this.attr.height
-
-    linepoints.push({'x': x, 'y': y})
-  }
-
-  var ss = 0
-  this.data.forEach(function (datum) {
-    ss += Math.pow(datum.y - newreg.predictY(newreg.getTerms(), datum.x), 2)
-  })
-
-  if (this.data.length > 0) {
-    $('#sslist').append(
-      `<tr id="row${name}">
-        <td>${this.color}</td>
-        <td>${order}</td>
-        <td>${ss / this.data.length}</td>
-        <td id="currss${name}">${ss / this.data.length}</td>
-        <td><button id="delete${name}" target-id="${name}" class="delete btn btn-primary">Delete</button></td>
-      <tr>`
-    )
-  }
-
-  $(`#delete${name}`).on('click', function () {
-    $(`#row${$(this).attr('target-id')}`).remove()
-    $(`#line${$(this).attr('target-id')}`).remove()
-  })
-
-  var line = d3.svg.line()
-    .interpolate('basis')
-    .x(function (d) { return d.x })
-    .y(function (d) { return d.y })
-
-  this.svg.append('path')
-    .datum(linepoints)
-    .attr('id', 'line' + name)
-    .attr('class', 'bestfit')
-    .attr('d', line)
-    .attr('color', that.color)
-    .attr('stroke', that.color)
-}
-
-ClickScatterPlot.prototype.drawKNNFit = function (order, name) {
-
-}
-
-var dataNames = {'x': 'Weight', 'y': 'Price'}
-
-var canvasWidth = $('#canvas').width()
-var canvasHeight = $(window).height() * 0.6
-
-if (canvasHeight > canvasWidth) {
-  canvasHeight = canvasWidth
-}
-
-var myplot = new ClickScatterPlot('myplot')
-myplot.setAttr({'attr': 'width', 'value': canvasWidth})
-myplot.setAttr({'attr': 'height', 'value': canvasHeight})
-myplot.setCanvas('canvas')
-myplot.createSVG()
-myplot.setVars(dataNames)
-myplot.render()
-
-var order = 1
-
-$('#increaseorder').on('click', function () {
-  order++
-  $('#orderdisplay').html(order)
-})
-$('#decreaseorder').on('click', function () {
-  order--
-  $('#orderdisplay').html(order)
-})
-
-$('#plotbestfit').on('click', function () {
-  myplot.drawPolynomialFit(order, `lbf${order}${myplot.color}`)
-})
-
-$('.color').on('click', function () {
-  $('.color').removeClass('active')
-  $(this).addClass('active')
-  myplot.changeColor($(this).attr('data-color'))
-})
-
-
-// Patrick Leask 2017
+// ClickScatterPlot.prototype.drawPolynomialFit = function (order, name) {
+//   if ($(`#line${name}`).length > 0) {
+//     return
+//   }
+//
+//   var that = this
+//
+//   var newreg = new PolynomialRegression(this.data, order)
+//   this.regressions.push({'name': name, 'reg': newreg})
+//
+//   // calculate some points for the line to be plotted
+//   var linepoints = []
+//   var lineGran = 100
+//   var xstep = (this.attr.width * (1 - this.attr.marginLeft - this.attr.marginRight)) / lineGran
+//   for (var i = 1; i < lineGran; i++) {
+//     var x = xstep * i
+//     var y = newreg.predictY(newreg.getTerms(), x + this.attr.marginLeft * this.attr.width) - this.attr.marginTop * this.attr.height
+//
+//     linepoints.push({'x': x, 'y': y})
+//   }
+//
+//   var ss = 0
+//   this.data.forEach(function (datum) {
+//     ss += Math.pow(datum.y - newreg.predictY(newreg.getTerms(), datum.x), 2)
+//   })
+//
+//   if (this.data.length > 0) {
+//     $('#sslist').append(
+//       `<tr id="row${name}">
+//         <td>${this.color}</td>
+//         <td>${order}</td>
+//         <td>${ss / this.data.length}</td>
+//         <td id="currss${name}">${ss / this.data.length}</td>
+//         <td><button id="delete${name}" target-id="${name}" class="delete btn btn-primary">Delete</button></td>
+//       <tr>`
+//     )
+//   }
+//
+//   $(`#delete${name}`).on('click', function () {
+//     $(`#row${$(this).attr('target-id')}`).remove()
+//     $(`#line${$(this).attr('target-id')}`).remove()
+//   })
+//
+//   var line = d3.svg.line()
+//     .interpolate('basis')
+//     .x(function (d) { return d.x })
+//     .y(function (d) { return d.y })
+//
+//   this.svg.append('path')
+//     .datum(linepoints)
+//     .attr('id', 'line' + name)
+//     .attr('class', 'bestfit')
+//     .attr('d', line)
+//     .attr('color', that.color)
+//     .attr('stroke', that.color)
+// }
+//
+// ClickScatterPlot.prototype.drawKNNFit = function (order, name) {
+//
+// }

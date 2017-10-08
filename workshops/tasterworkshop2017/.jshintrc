@@ -1,0 +1,9 @@
+{
+	"undef": true,
+	"unused": true,
+	"globals": {
+		"d3": false,
+		"$": false
+	},
+	"esversion": 6
+}

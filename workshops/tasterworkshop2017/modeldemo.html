@@ -2,7 +2,7 @@
 <html>
 
 <meta charset="utf-8">
-<title>Polynomial Regression Demo</title>
+<title>k-Nearest Neighbours Demo</title>
 
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
@@ -33,41 +33,32 @@
 
   <div class="container">
     <p>
-      <a href="../../index.html"> &gt Home</a><a href="./main.html"> &gt Taster Workshop 2017</a> &gt Polynomial Regression Demo
+      <a href="../../index.html"> &gt Home</a><a href="./main.html"> &gt Taster Workshop 2017</a> &gt k-Nearest Neighbours Demo
     </p>
-    <h1>Polynomial Regression Demo</h1>
+    <h1>k-Nearest Neighbours Demo</h1>
     <div id="canvas" class="text-center"></div>
     <div class="row">
       <div class="btn-group btn">
-        <button class="btn btn-primary disabled">Order</button>
-        <button class="btn btn-outline-primary disabled" id="orderdisplay">1</button>
+        <button class="btn btn-primary disabled">k</button>
+        <button class="btn btn-outline-primary disabled" id="orderdisplay">3</button>
         <button class="btn btn-primary" id="decreaseorder">-</button>
         <button class="btn btn-primary" id="increaseorder">+</button>
         <button class="btn btn-danger" id="plotbestfit">Plot</button>
       </div>
       <div class="btn btn-group">
-        <button class="color btn btn-outline-primary disabled">Colour</button>
+        <button class="color btn btn-outline-primary disabled">Class</button>
         <button class="color btn btn-primary" data-color="blue"></button>
         <button class="color btn btn-warning" data-color="yellow"></button>
         <button class="color btn btn-danger" data-color="red"></button>
         <button class="color btn btn-success" data-color="green"></button>
       </div>
     </div>
-    <table id="sslist" class="table">
-      <tr>
-        <th>Color</th>
-        <th>Order</th>
-        <th>Initial Sum of Squares</th>
-        <th>Current Sum of Squares</th>
-        <th></th>
-      </tr>
-    </table>
   </div>
 
 	<script src="https://d3js.org/d3.v3.min.js"></script>
   <script src="regression.js"></script>
   <script src="https://www.lactame.com/lib/ml/2.2.0/ml.min.js"></script>
-	<script src="overfittingdemo.js"></script>
+	<script src="modeldemo.js"></script>
 </body>
 
 </html>
